@@ -271,8 +271,8 @@ object BatteryStyle : BaseHook() {
         iconView.scaleType = ImageView.ScaleType.CENTER
         iconView.setPadding(0, 0, 0, 0)
         iconView.layoutParams?.let { layoutParams ->
-            layoutParams.width = dp2px(21f)
-            layoutParams.height = dp2px(12f)
+            layoutParams.width = dp2px(if (charging) 31f else 26f)
+            layoutParams.height = dp2px(14f)
             iconView.layoutParams = layoutParams
             iconView.requestLayout()
         }
@@ -307,8 +307,14 @@ object BatteryStyle : BaseHook() {
             color = Color.WHITE
             style = Paint.Style.FILL
         }
-        private val clearPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        private val textPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+            color = Color.WHITE
             style = Paint.Style.FILL
+            textAlign = Paint.Align.CENTER
+            textSize = 8.5f * density
+            typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
+        }
+        private val clearTextPaint = Paint(textPaint).apply {
             xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
         }
         private var batteryLevel = 100
@@ -319,6 +325,7 @@ object BatteryStyle : BaseHook() {
             isCharging = charging
             outlinePaint.color = color
             fillPaint.color = color
+            textPaint.color = color
             invalidateSelf()
         }
 
@@ -327,9 +334,11 @@ object BatteryStyle : BaseHook() {
             val availableHeight = bounds.height().toFloat()
             if (availableWidth <= 0f || availableHeight <= 0f) return
 
-            val iconWidth = minOf(availableWidth, 21f * density)
-            val iconHeight = minOf(availableHeight, 11f * density)
-            val left = bounds.left + (availableWidth - iconWidth) / 2f
+            val leadingSpacing = 2f * density
+            val chargingWidth = if (isCharging) 5f * density else 0f
+            val iconWidth = minOf(availableWidth - leadingSpacing - chargingWidth, 24f * density)
+            val iconHeight = minOf(availableHeight, 13f * density)
+            val left = bounds.left + leadingSpacing
             val top = bounds.top + (availableHeight - iconHeight) / 2f
             val terminalWidth = 1.5f * density
             val strokeInset = outlinePaint.strokeWidth / 2f
@@ -353,7 +362,7 @@ object BatteryStyle : BaseHook() {
             )
             canvas.drawRoundRect(body, 2f * density, 2f * density, outlinePaint)
 
-            val inner = RectF(body).apply { inset(1.35f * density, 1.35f * density) }
+            val inner = RectF(body).apply { inset(0.4f * density, 0.4f * density) }
             val fillRight = inner.left + inner.width() * batteryLevel / 100f
             canvas.drawRoundRect(
                 inner.left,
@@ -365,19 +374,29 @@ object BatteryStyle : BaseHook() {
                 fillPaint
             )
 
+            val percentageText = batteryLevel.toString()
+            val textCenterX = body.centerX()
+            val textBaseline = body.centerY() - (textPaint.ascent() + textPaint.descent()) / 2f
+            canvas.drawText(percentageText, textCenterX, textBaseline, textPaint)
+
             if (isCharging) {
-                val centerX = body.centerX()
+                val centerX = left + iconWidth + 2.5f * density
                 val centerY = body.centerY()
-                val bolt = Path().apply {
-                    moveTo(centerX + 0.4f * density, centerY - 3.2f * density)
-                    lineTo(centerX - 1.8f * density, centerY + 0.2f * density)
-                    lineTo(centerX - 0.2f * density, centerY + 0.2f * density)
-                    lineTo(centerX - 0.6f * density, centerY + 3.2f * density)
-                    lineTo(centerX + 1.8f * density, centerY - 0.7f * density)
-                    lineTo(centerX + 0.25f * density, centerY - 0.7f * density)
+                Path().apply {
+                    moveTo(centerX + 0.35f * density, centerY - 2.8f * density)
+                    lineTo(centerX - 1.45f * density, centerY + 0.15f * density)
+                    lineTo(centerX - 0.1f * density, centerY + 0.15f * density)
+                    lineTo(centerX - 0.45f * density, centerY + 2.8f * density)
+                    lineTo(centerX + 1.5f * density, centerY - 0.6f * density)
+                    lineTo(centerX + 0.15f * density, centerY - 0.6f * density)
                     close()
-                }
-                canvas.drawPath(bolt, clearPaint)
+                }.also { canvas.drawPath(it, fillPaint) }
+            }
+
+            canvas.save().also { saveCount ->
+                canvas.clipRect(bounds.left.toFloat(), bounds.top.toFloat(), fillRight, bounds.bottom.toFloat())
+                canvas.drawText(percentageText, textCenterX, textBaseline, clearTextPaint)
+                canvas.restoreToCount(saveCount)
             }
             canvas.restoreToCount(layer)
         }
@@ -385,20 +404,22 @@ object BatteryStyle : BaseHook() {
         override fun setAlpha(alpha: Int) {
             outlinePaint.alpha = alpha
             fillPaint.alpha = alpha
+            textPaint.alpha = alpha
             invalidateSelf()
         }
 
         override fun setColorFilter(colorFilter: ColorFilter?) {
             outlinePaint.colorFilter = colorFilter
             fillPaint.colorFilter = colorFilter
+            textPaint.colorFilter = colorFilter
             invalidateSelf()
         }
 
         @Deprecated("Deprecated in Java")
         override fun getOpacity(): Int = PixelFormat.TRANSLUCENT
 
-        override fun getIntrinsicWidth(): Int = (21f * density).toInt()
+        override fun getIntrinsicWidth(): Int = ((if (isCharging) 31f else 26f) * density).toInt()
 
-        override fun getIntrinsicHeight(): Int = (12f * density).toInt()
+        override fun getIntrinsicHeight(): Int = (14f * density).toInt()
     }
 }

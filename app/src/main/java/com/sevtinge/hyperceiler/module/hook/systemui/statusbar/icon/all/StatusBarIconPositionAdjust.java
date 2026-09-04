@@ -29,7 +29,6 @@ import com.sevtinge.hyperceiler.module.base.BaseHook;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import de.robv.android.xposed.XposedHelpers;
 
@@ -169,16 +168,17 @@ public class StatusBarIconPositionAdjust extends BaseHook {
             findAndHookConstructor(mStatusBarIconList, String[].class, new MethodHook() {
                 @Override
                 protected void before(MethodHookParam param) {
-                    boolean isRightController = "StatusBarIconList".equals(param.thisObject.getClass().getSimpleName());
                     ArrayList<String> allStatusIcons = new ArrayList<>(Arrays.asList((String[]) param.args[0]));
+                    boolean isRightController = allStatusIcons.contains("mobile") && allStatusIcons.contains("wifi");
                     if (isRightController) {
-                        int startIndex = allStatusIcons.indexOf("mobile");
-                        int endIndex = allStatusIcons.indexOf("demo_wifi") + 1;
-                        List<String> removedIcons = allStatusIcons.subList(startIndex, endIndex);
-                        removedIcons.clear();
-                        if (!isMoveLeft) {
-                            startIndex = allStatusIcons.indexOf("hd");
-                            allStatusIcons.addAll(startIndex + 1, mSignalRelatedIcons);
+                        int startIndex = mSignalRelatedIcons.stream()
+                                .mapToInt(allStatusIcons::indexOf)
+                                .filter(index -> index >= 0)
+                                .min()
+                                .orElse(allStatusIcons.size());
+                        allStatusIcons.removeIf(mSignalRelatedIcons::contains);
+                        if (!isMoveLeft || isSwapWiFiAndMobileNetwork) {
+                            allStatusIcons.addAll(startIndex, mSignalRelatedIcons);
                         }
                         param.args[0] = allStatusIcons.toArray(new String[0]);
                     } else if (isMoveLeft && !isSwapWiFiAndMobileNetwork) {
