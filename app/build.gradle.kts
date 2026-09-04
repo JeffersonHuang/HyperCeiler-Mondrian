@@ -34,7 +34,7 @@ val getGitCommitCount: () -> Int = {
 }
 
 // Keep the device-specific build reproducible even when it is built inside a full Git checkout.
-val getVersionCode: () -> Int = { 4003 }
+val getVersionCode: () -> Int = { 4004 }
 
 fun getGitHash(): String {
     val process = ProcessBuilder("git", "rev-parse", "--short", "HEAD").start()
@@ -67,7 +67,7 @@ android {
         minSdk = 33
         targetSdk = 35
         versionCode = getVersionCode()
-        versionName = "2.5.156-mondrian3"
+        versionName = "2.5.156-mondrian4"
 
         val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").apply {
             timeZone = TimeZone.getTimeZone("Asia/Shanghai")

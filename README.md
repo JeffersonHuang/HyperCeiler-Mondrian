@@ -18,7 +18,7 @@
 
 - 目标设备：Redmi K60 / POCO F5 Pro（`mondrian`）
 - 已验证系统：MIUI 14 Global `V14.0.6.0.TMNMIXM`、Android 13
-- 版本：`2.5.156-mondrian3`（versionCode `4003`）
+- 版本：`2.5.156-mondrian4`（versionCode `4004`）
 - Xposed 环境：Vector 2.2 + NeoZygisk
 
 本版本针对上述系统的 SystemUI 做了兼容处理，包括：
@@ -28,6 +28,7 @@
 - 修复双排移动网络图标兼容性
 - 修复双排图标启用后 VoLTE / VoWiFi 图标无法隐藏
 - 增加横向紧凑 Pixel 风格电池图标，并适配电量、充电和深浅色变化
+- Mondrian 专用构建不再显示仅适用于官方发行签名的红色警告
 - 为 Android 13 SystemUI 路径和字段增加兼容及空值保护
 
 其他设备、ROM 或 Android 版本没有经过验证。刷入或启用模块前，请确保能够进入安全模式，

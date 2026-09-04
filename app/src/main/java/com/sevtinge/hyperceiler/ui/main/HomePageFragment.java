@@ -3,6 +3,7 @@ package com.sevtinge.hyperceiler.ui.main;
 import static com.sevtinge.hyperceiler.prefs.PreferenceHeader.notInSelectedScope;
 import static com.sevtinge.hyperceiler.utils.devicesdk.SystemSDKKt.getBaseOs;
 import static com.sevtinge.hyperceiler.utils.devicesdk.SystemSDKKt.getRomAuthor;
+import static com.sevtinge.hyperceiler.utils.devicesdk.SystemSDKKt.getSystemVersionIncremental;
 import static com.sevtinge.hyperceiler.utils.devicesdk.SystemSDKKt.isFullSupport;
 import static com.sevtinge.hyperceiler.utils.log.LogManager.IS_LOGGER_ALIVE;
 
@@ -10,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
@@ -380,9 +382,20 @@ public class HomePageFragment extends DashboardFragment
 
     public void isSignPass() {
         if (mWarnTipVisible) return;
+        if (isVerifiedMondrianBuild()) {
+            mHeadtipWarn.setVisible(false);
+            mWarnTipVisible = true;
+            return;
+        }
         mHeadtipWarn.setTitle(R.string.headtip_warn_sign_verification_failed);
         mHeadtipWarn.setVisible(!SignUtils.isSignCheckPass(requireContext()));
         mWarnTipVisible = true;
+    }
+
+    private boolean isVerifiedMondrianBuild() {
+        return BuildConfig.VERSION_NAME.contains("-mondrian") &&
+                "mondrian".equals(Build.DEVICE) &&
+                "V14.0.6.0.TMNMIXM".equals(getSystemVersionIncremental());
     }
 
     public void isSupportAutoSafeMode() {
