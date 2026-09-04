@@ -27,6 +27,12 @@
             android:title="@string/system_ui_status_bar_battery_style_change_location_title" />
 
         <SwitchPreference
+            android:defaultValue="true"
+            android:key="prefs_key_system_ui_status_bar_battery_style_pixel"
+            android:title="@string/system_ui_status_bar_battery_style_pixel_title"
+            android:summary="@string/system_ui_status_bar_battery_style_pixel_summary" />
+
+        <SwitchPreference
             android:defaultValue="false"
             android:key="prefs_key_system_ui_status_bar_battery_style_enable_custom"
             android:title="@string/system_ui_statusbar_network_speed_all_status" />

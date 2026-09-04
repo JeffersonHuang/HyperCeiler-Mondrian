@@ -744,6 +744,8 @@
     <string name="system_ui_status_bar_battery_style_font_size">Battery percentage font size</string>
     <string name="system_ui_status_bar_battery_style_font_mark_size">Battery percentage symbol font size</string>
     <string name="system_ui_status_bar_battery_style_vertical_offset">Up and down offset of battery percentage symbol</string>
+    <string name="system_ui_status_bar_battery_style_pixel_title">Pixel-style battery icon</string>
+    <string name="system_ui_status_bar_battery_style_pixel_summary">Use a compact horizontal battery icon to reduce status bar width</string>
     <string name="system_ui_statusbar_iconmanage_wifi_title">Wi-Fi</string>
     <string name="system_ui_statusbar_iconmanage_bluetooth_title">Bluetooth</string>
     <string name="system_ui_statusbar_iconmanage_mobile_title">Mobile network</string>

@@ -176,7 +176,8 @@ public class SystemUiU extends BaseModule {
                 mPrefsMap.getBoolean("system_ui_status_bar_battery_charging");
         initHook(HideBatteryIcon.INSTANCE, isHideBatteryIcon);
         initHook(BatteryStyle.INSTANCE, mPrefsMap.getBoolean("system_ui_status_bar_battery_style_enable_custom") ||
-                mPrefsMap.getBoolean("system_ui_status_bar_battery_style_change_location"));
+                mPrefsMap.getBoolean("system_ui_status_bar_battery_style_change_location") ||
+                mPrefsMap.getBoolean("system_ui_status_bar_battery_style_pixel"));
         // initHook(new BatteryIndicator(), mPrefsMap.getBoolean("system_ui_status_bar_battery_indicator_enable"));
 
         // 网速指示器
