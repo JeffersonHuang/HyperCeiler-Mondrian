@@ -14,66 +14,48 @@
   ~ You should have received a copy of the GNU Affero General Public License
   ~ along with this program.  If not, see <https://www.gnu.org/licenses/>.
   ~
-  ~ Copyright (C) 2023-2026 HyperCeiler Contributions
+  ~ Copyright (C) 2023-2025 HyperCeiler Contributions
   -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory android:title="@string/development_tools">
-        <Preference
-            android:key="prefs_key_development_debug_info"
-            android:title="@string/development_debug_info"
-            android:fragment="com.sevtinge.hyperceiler.settings.development.DevelopmentDebugInfoFragment" />
 
-        <Preference
-            android:key="prefs_key_development_debug_mode"
-            android:title="@string/debug_mode"
-            android:fragment="com.sevtinge.hyperceiler.settings.development.DevelopmentDebugModeFragment" />
+    <PreferenceCategory>
 
-        <Preference
-            android:fragment="com.sevtinge.hyperceiler.settings.development.DevelopmentUIFragment"
-            android:key="prefs_key_development_ui"
-            android:title="@string/development_ui" />
+    <Preference
+        android:fragment="com.sevtinge.hyperceiler.ui.settings.development.DevelopmentDebugInfoFragment"
+        android:key="prefs_key_development_debug_info"
+        android:title="@string/development_debug_info" />
 
-        <Preference
-            android:key="prefs_key_development_oobe"
-            android:title="OOBE"
-            android:enabled="true" />
+    <Preference
+        android:fragment="com.sevtinge.hyperceiler.ui.settings.development.DevelopmentKillFragment"
+        android:key="prefs_key_development_kill"
+        android:title="@string/kill" />
 
-    </PreferenceCategory>
+    <Preference
+        android:fragment="com.sevtinge.hyperceiler.ui.settings.development.DevelopmentPrefsFragment"
+        android:key="prefs_key_development_prefs"
+        android:title="@string/development_prefs" />
 
-    <PreferenceCategory android:title="@string/development_system">
-        <Preference
-            android:key="prefs_key_development_kill"
-            android:title="@string/kill"
-            android:fragment="com.sevtinge.hyperceiler.settings.development.DevelopmentKillFragment" />
+    <Preference
+        android:fragment="com.sevtinge.hyperceiler.ui.settings.development.DevelopmentUIFragment"
+        android:key="prefs_key_development_ui"
+        android:title="@string/development_ui" />
 
-        <Preference
-            android:key="prefs_key_development_prefs"
-            android:title="@string/development_prefs"
-            android:fragment="com.sevtinge.hyperceiler.settings.development.DevelopmentPrefsFragment" />
+    <Preference
+        android:key="prefs_key_development_cmd_r"
+        android:title="@string/development_cmd_r" />
 
-        <Preference
-            android:key="prefs_key_development_cmd_r"
-            android:title="@string/development_cmd_r" />
+    <Preference
+        android:key="prefs_key_development_delete_all_dexkit_cache"
+        android:title="@string/development_delete_all_dexkit_cache" />
 
-    </PreferenceCategory>
+    <SwitchPreference
+        android:title="@string/development_close_log_alert_dialog"
+        android:key="prefs_key_development_close_log_alert_dialog"
+        android:defaultValue="false" />
 
-    <PreferenceCategory android:title="@string/development_cache">
-        <SwitchPreference
-            android:key="prefs_key_development_close_log_alert_dialog"
-            android:title="@string/development_close_log_alert_dialog"
-            android:defaultValue="false" />
-
-        <Preference
-            android:key="prefs_key_development_fix_lsposed_log"
-            android:title="@string/development_fix_lsposed_log" />
-
-        <Preference
-            android:key="prefs_key_development_delete_all_dexkit_cache"
-            android:title="@string/development_delete_all_dexkit_cache" />
-
-        <Preference
-            android:key="prefs_key_development_clear_app_properties"
-            android:title="@string/development_clear_app_properties" />
+    <Preference
+        android:key="prefs_key_development_fix_lsposed_log"
+        android:title="@string/development_fix_lsposed_log" />
 
     </PreferenceCategory>
 

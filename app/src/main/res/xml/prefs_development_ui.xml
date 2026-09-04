@@ -14,7 +14,7 @@
   ~ You should have received a copy of the GNU Affero General Public License
   ~ along with this program.  If not, see <https://www.gnu.org/licenses/>.
   ~
-  ~ Copyright (C) 2023-2026 HyperCeiler Contributions
+  ~ Copyright (C) 2023-2025 HyperCeiler Contributions
   -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -44,39 +44,31 @@
     </PreferenceCategory>
 
     <PreferenceCategory android:title="PreferenceCategory">
+        <RadioSetPreferenceCategory>
+            <RadioButtonPreference
+                android:persistent="false"
+                android:title="RadioButtonPreference" />
+
+        </RadioSetPreferenceCategory>
+
         <com.sevtinge.hyperceiler.prefs.PreferenceHeader
             android:icon="@drawable/ic_hyperceiler_settings_v140"
             android:title="PreferenceHeader" />
 
-        <SeekBarPreference
-            android:defaultValue="50"
+        <SeekBarPreferenceCompat
+            app:defaultValue="50"
             android:format="%d"
             android:title="SeekBarPreference"
             app:maxValue="100"
             app:showSeekBarValue="true" />
 
         <SeekBarPreferenceCompat
-            android:title="SeekBarPreferenceCompat"
-            android:key="prefs_key_development_ui_test_seekbar_compat"
             app:defaultValue="50"
+            android:title="SeekBarPreferenceCompat"
             app:defaultValueTitle="@string/array_default"
             app:format="%s"
             app:maxValue="100"
-            app:stepValue="1" />
-
+            app:minValue="0" />
     </PreferenceCategory>
-
-    <fan.preference.RadioButtonPreferenceCategory>
-        <fan.preference.RadioButtonPreference
-            android:persistent="false"
-            android:title="RadioButtonPreference" />
-
-        <fan.preference.RadioSetPreferenceCategory>
-            <fan.preference.RadioButtonPreference
-                android:persistent="false"
-                android:title="RadioButtonPreference2" />
-
-        </fan.preference.RadioSetPreferenceCategory>
-    </fan.preference.RadioButtonPreferenceCategory>
 
 </PreferenceScreen>

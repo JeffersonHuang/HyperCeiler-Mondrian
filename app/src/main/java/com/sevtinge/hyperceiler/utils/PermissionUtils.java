@@ -1,27 +1,29 @@
 /*
  * This file is part of HyperCeiler.
-
+ *
  * HyperCeiler is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
  * published by the Free Software Foundation, either version 3 of the
  * License.
-
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Affero General Public License for more details.
-
+ *
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
- * Copyright (C) 2023-2026 HyperCeiler Contributions
+ *
+ * Copyright (C) 2023-2025 HyperCeiler Contributions
  */
+
 package com.sevtinge.hyperceiler.utils;
 
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.os.Build;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -31,24 +33,14 @@ import java.util.List;
 
 public class PermissionUtils {
 
-    // 权限申请
-    public static void init(Activity activity) {
-        requestPermissions(activity, new String[]{Manifest.permission.POST_NOTIFICATIONS}, 1,
-            // 实现接口方法
-            new OnPermissionListener() {
-                @Override
-                public void onPermissionGranted(Context context) {
-                    // 获取权限成功
-                }
+    //权限项数组
+    public static final String[] PERMISSIONS = {
+            Manifest.permission.READ_PHONE_STATE,
+            Manifest.permission.RECORD_AUDIO,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.SYSTEM_ALERT_WINDOW
+    };
 
-                @Override
-                public void onPermissionDenied() {
-                    // 获取权限失败
-                    activity.finish();
-                }
-            }
-        );
-    }
 
     private static int mRequestCode = -1;
 
@@ -59,10 +51,10 @@ public class PermissionUtils {
      */
     public interface OnPermissionListener {
 
-        // 权限通过
+        //权限通过
         void onPermissionGranted(Context context);
 
-        // 权限拒绝
+        //权限拒绝
         void onPermissionDenied();
 
     }
@@ -75,18 +67,21 @@ public class PermissionUtils {
      * @param listener    权限请求监听
      */
     public static void requestPermissions(Activity context, String[] permissions, int requestCode, OnPermissionListener listener) {
+        if (Build.VERSION.SDK_INT < 23) {
+            return;
+        }
         mOnPermissionListener = listener;
-        List<String> deniedPermissions = new ArrayList<>();
-        for (String permission : permissions) {
-            if (ContextCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
-                deniedPermissions.add(permission);// 添加未授予的权限
+        List<String> deniedPermissions = new ArrayList<String>();
+        for (int i = 0; i < permissions.length; i++) {
+            if (ContextCompat.checkSelfPermission(context, permissions[i]) != PackageManager.PERMISSION_GRANTED) {
+                deniedPermissions.add(permissions[i]);//添加未授予的权限
             }
         }
 
-        if (!deniedPermissions.isEmpty()) {
+        if (deniedPermissions.size() > 0) {
             mRequestCode = requestCode;
-            // 其中请求码范围在[0,65535]
-            ActivityCompat.requestPermissions(context, deniedPermissions.toArray(new String[0]), requestCode);
+            //其中请求码范围在[0,65535]
+            ActivityCompat.requestPermissions(context, deniedPermissions.toArray(new String[deniedPermissions.size()]), requestCode);
         } else {
             mOnPermissionListener.onPermissionGranted(context);
         }
@@ -120,8 +115,5 @@ public class PermissionUtils {
             }
         }
     }
-
-    public static boolean hasPermission(Context context, String permission) {
-        return ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED;
-    }
 }
+

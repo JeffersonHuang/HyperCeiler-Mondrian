@@ -14,18 +14,18 @@
   ~ You should have received a copy of the GNU Affero General Public License
   ~ along with this program.  If not, see <https://www.gnu.org/licenses/>.
   ~
-  ~ Copyright (C) 2023-2026 HyperCeiler Contributions
+  ~ Copyright (C) 2023-2025 HyperCeiler Contributions
   -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <com.sevtinge.hyperceiler.prefs.LayoutPreference
+    <Preference
         android:layout="@layout/headtip_tip"
         android:key="prefs_key_headtip_tip"
         android:enabled="false"
         android:title="@string/headtip_tip_long_press_to_copy" />
 
     <Preference
-        android:layout="@layout/monospace_textview"
+        android:layout="@layout/development_debug_info"
         android:key="prefs_key_debug_info"
         android:enabled="true"
         android:title="@string/debug_info" />

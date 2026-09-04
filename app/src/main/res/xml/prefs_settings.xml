@@ -14,7 +14,7 @@
   ~ You should have received a copy of the GNU Affero General Public License
   ~ along with this program.  If not, see <https://www.gnu.org/licenses/>.
   ~
-  ~ Copyright (C) 2023-2026 HyperCeiler Contributions
+  ~ Copyright (C) 2023-2025 HyperCeiler Contributions
   -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -23,11 +23,6 @@
             android:defaultValue="true"
             android:key="prefs_key_settings_hide_app_icon"
             android:title="@string/settings_hide_app_icon" />
-
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="prefs_key_settings_float_nav"
-            android:title="@string/settings_float_nav" />
 
         <fan.preference.DropDownPreference
             android:defaultValue="0"
@@ -48,25 +43,14 @@
         <fan.preference.DropDownPreference
             android:defaultValue="0"
             android:key="prefs_key_settings_app_language"
-            android:title="@string/settings_app_language" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory android:title="@string/settings_module_title">
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="prefs_key_settings_scope_sync"
-            android:summary="@string/settings_scope_sync_desc"
-            android:title="@string/settings_scope_sync" />
+            android:title="@string/settings_app_language"
+            app:entries="@array/settings_app_language"
+            app:entryValues="@array/settings_app_language_value" />
 
         <Preference
-            android:key="prefs_key_settings_scope"
-            android:title="@string/settings_scope" />
-
-        <Preference
-            android:key="prefs_key_settings_hot_reload"
-            android:title="@string/settings_hot_reload"
-            android:summary="@string/settings_hot_reload_desc" />
+            android:key="prefs_key_set_homepage_entrance"
+            android:title="@string/set_homepage_entrance"
+            android:fragment="com.sevtinge.hyperceiler.ui.helper.HomepageEntrance" />
 
     </PreferenceCategory>
 
@@ -86,30 +70,23 @@
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/settings_bug_title">
+
         <Preference
-            android:fragment="com.sevtinge.hyperceiler.home.safemode.SafeModeFragment"
+            android:fragment="com.sevtinge.hyperceiler.ui.settings.SafeModeFragment"
             android:key="prefs_key_safe_mode"
             android:summary="@string/settings_safe_mode_desc"
             android:title="@string/settings_safe_mode" />
 
         <fan.preference.DropDownPreference
-            android:defaultValue="1"
-            android:key="prefs_key_log_level_v2"
+            android:defaultValue="2"
+            android:key="prefs_key_log_level"
             android:summary="@string/disable_detailed_log_desc"
             android:title="@string/log_level"
             app:entries="@array/log_level"
             app:entryValues="@array/log_level_value" />
 
         <Preference
-            android:key="prefs_key_log_viewer"
-            android:title="@string/log_viewer">
-            <intent
-                android:targetPackage="com.sevtinge.hyperceiler"
-                android:targetClass="com.sevtinge.hyperceiler.log.LogViewerActivity"/>
-        </Preference>
-
-        <Preference
-            android:fragment="com.sevtinge.hyperceiler.settings.development.DevelopmentFragment"
+            android:fragment="com.sevtinge.hyperceiler.ui.settings.development.DevelopmentFragment"
             android:key="prefs_key_development"
             android:title="@string/development" />
 

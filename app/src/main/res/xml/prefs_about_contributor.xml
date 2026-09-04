@@ -14,18 +14,15 @@
   ~ You should have received a copy of the GNU Affero General Public License
   ~ along with this program.  If not, see <https://www.gnu.org/licenses/>.
   ~
-  ~ Copyright (C) 2023-2026 HyperCeiler Contributions
+  ~ Copyright (C) 2023-2025 HyperCeiler Contributions
   -->
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <Preference
         android:summary="@string/about_contributer_desc"/>
 
-    <PreferenceCategory
-        app:isPreferenceVisible="false"
-        android:key="prefs_key_about_contributors" >
-        <!--<Preference
+    <PreferenceCategory>
+        <Preference
             android:summary="GitHub@Adlyq"
             android:title="Adlyq">
             <intent
@@ -38,13 +35,6 @@
             <intent
                 android:action="android.intent.action.VIEW"
                 android:data="https://github.com/CC0126" />
-        </Preference>
-        <Preference
-            android:summary="GitHub@CECoffee"
-            android:title="CECoffee0v0">
-            <intent
-                android:action="android.intent.action.VIEW"
-                android:data="https://github.com/CECoffee" />
         </Preference>
         <Preference
             android:summary="GitHub@CLOUDERHEM"
@@ -152,13 +142,6 @@
                 android:data="https://github.com/LiuBodong" />
         </Preference>
         <Preference
-            android:summary="GitHub@LuoYunXi0407"
-            android:title="LuoYunXi">
-            <intent
-                android:action="android.intent.action.VIEW"
-                android:data="https://github.com/LuoYunXi0407" />
-        </Preference>
-        <Preference
             android:summary="GitHub@Memory2314"
             android:title="Memory">
             <intent
@@ -222,13 +205,6 @@
                 android:data="https://github.com/pzcn" />
         </Preference>
         <Preference
-            android:summary="GitHub@uarix"
-            android:title="Quarix">
-            <intent
-                android:action="android.intent.action.VIEW"
-                android:data="https://github.com/uarix" />
-        </Preference>
-        <Preference
             android:summary="GitHub@qdsp6sw"
             android:title="qdsp6sw">
             <intent
@@ -285,14 +261,7 @@
                 android:data="https://github.com/tehcneko" />
         </Preference>
         <Preference
-            android:summary="GitHub@mynna404"
-            android:title="TruE">
-            <intent
-                android:action="android.intent.action.VIEW"
-                android:data="https://github.com/mynna404" />
-        </Preference>
-        <Preference
-            android:summary="GitHub@v5u871"
+            android:summary="GitHub@v5u871 / CoolApk@v5u87"
             android:title="v5u87">
             <intent
                 android:action="android.intent.action.VIEW"
@@ -327,7 +296,7 @@
                 android:data="https://github.com/weigui404" />
         </Preference>
         <Preference
-            android:summary="GitHub@Weverses"
+            android:summary="GitHub@Weverses / CoolApk@Weverse"
             android:title="Weverse">
             <intent
                 android:action="android.intent.action.VIEW"
@@ -418,13 +387,6 @@
                 android:data="https://github.com/klxiaoniu" />
         </Preference>
         <Preference
-            android:summary="GitHub@ghhccghk"
-            android:title="李太白">
-            <intent
-                android:action="android.intent.action.VIEW"
-                android:data="https://github.com/ghhccghk" />
-        </Preference>
-        <Preference
             android:summary="GitHub@lingqiqi5211"
             android:title="铃柒柒">
             <intent
@@ -439,14 +401,14 @@
                 android:data="http://www.coolapk.com/u/12223114" />
         </Preference>
         <Preference
-            android:summary="GitHub@HolyBearTW"
+            android:summary="GitHub@a406010503"
             android:title="聖小熊">
             <intent
                 android:action="android.intent.action.VIEW"
-                android:data="https://github.com/HolyBearTW" />
+                android:data="https://github.com/a406010503" />
         </Preference>
         <Preference
-            android:summary="GitHub@Meetingfate"
+            android:summary="GitHub@Meetingfate / CoolApk@相见即是缘"
             android:title="相见即是缘">
             <intent
                 android:action="android.intent.action.VIEW"
@@ -460,15 +422,15 @@
                 android:data="https://github.com/xing0meng" />
         </Preference>
         <Preference
-            android:summary="GitHub@lswlc33"
+            android:summary="GitHub@lswlc33 / CoolApk@雪中明月_Official"
             android:title="雪中明月">
             <intent
                 android:action="android.intent.action.VIEW"
                 android:data="https://github.com/lswlc33" />
         </Preference>
         <Preference
-            android:summary="GitHub@zjw2017"
-            android:title="柚稚">
+            android:summary="GitHub@zjw2017 / CoolApk@柚稚的孩纸"
+            android:title="柚稚的孩纸">
             <intent
                 android:action="android.intent.action.VIEW"
                 android:data="https://github.com/zjw2017" />
@@ -486,16 +448,7 @@
             <intent
                 android:action="android.intent.action.VIEW"
                 android:data="https://github.com/pomelohan" />
-        </Preference>-->
+        </Preference>
     </PreferenceCategory>
-
-    <PreferenceCategory
-        android:key="prefs_key_about_contributors_progressing"
-        android:layout="@layout/pref_progress" />
-
-    <PreferenceCategory
-        app:isPreferenceVisible="false"
-        android:key="prefs_key_about_contributors_load_failed"
-        android:layout="@layout/pref_load_failed" />
 
 </PreferenceScreen>

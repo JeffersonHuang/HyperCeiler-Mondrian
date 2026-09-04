@@ -14,7 +14,7 @@
   ~ You should have received a copy of the GNU Affero General Public License
   ~ along with this program.  If not, see <https://www.gnu.org/licenses/>.
   ~
-  ~ Copyright (C) 2023-2026 HyperCeiler Contributions
+  ~ Copyright (C) 2023-2025 HyperCeiler Contributions
   -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -25,7 +25,7 @@
         android:summary="@string/xposed_description"
         app:isPreferenceVisible="false" />
 
-    <!--<PreferenceCategory>
+    <PreferenceCategory>
 
         <Preference
             android:enabled="false"
@@ -60,81 +60,44 @@
             android:layout="@layout/preference_padding"
             android:title="68D8CAA79216300F9DEE19A24CB6301ABF1687DF" />
 
-    </PreferenceCategory>-->
+    </PreferenceCategory>
 
-    <PreferenceCategory>
+    <PreferenceCategory android:title="@string/about_developer_title">
 
         <Preference
-            android:key="prefs_key_about_author"
             android:icon="@drawable/ic_sevtinge"
             android:layout="@layout/preference_round_layout"
             android:summary="\@Sevtinge"
-            android:title="Sevtinge">
+            android:title="绀漓 | Sevtinge">
             <intent
                 android:action="android.intent.action.VIEW"
                 android:data="https://github.com/sevtinge" />
         </Preference>
 
-    </PreferenceCategory>
-
-    <PreferenceCategory>
-
         <Preference
+            android:fragment="com.sevtinge.hyperceiler.ui.about.AboutContributerFragment"
             android:key="prefs_key_about_contributer"
-            android:title="@string/about_contributer"
-            android:fragment="com.sevtinge.hyperceiler.about.AboutContributorsFragment" />
+            android:title="@string/about_contributer" />
 
-        <Preference android:title="@string/about_offical">
-            <intent
-                android:action="android.intent.action.VIEW"
-                android:data="https://hyperceiler.sevtinge.com" />
-        </Preference>
-
-        <Preference
-            android:summary="@string/about_crwd_desc"
-            android:title="@string/about_crwd">
-            <intent
-                android:action="android.intent.action.VIEW"
-                android:data="https://hosted.weblate.org/engage/hyperceiler/" />
-        </Preference>
-
-        <Preference
-            android:summary="@string/about_donation_desc"
-            android:title="@string/about_donation">
-            <intent
-                android:action="android.intent.action.VIEW"
-                android:data="https://www.sevtinge.com/donation" />
-        </Preference>
-
-    </PreferenceCategory>
-
-    <PreferenceCategory>
-        <Preference android:title="@string/about_protocol">
-            <intent
-                android:action="android.intent.action.VIEW"
-                android:data="https://hyperceiler.sevtinge.com/Protocol" />
-        </Preference>
-
-        <Preference android:title="@string/about_privacy">
-            <intent
-                android:action="android.intent.action.VIEW"
-                android:data="https://hyperceiler.sevtinge.com/Privacy" />
-        </Preference>
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/about_translator_title">
 
-        <fan.preference.TextPreference
-            android:title="@string/translator"
-            android:text="@string/language">
+        <Preference
+            android:summary="@string/language"
+            android:title="@string/translator">
             <intent
                 android:action="android.intent.action.VIEW"
                 android:data="@string/translator_url" />
-        </fan.preference.TextPreference>
+        </Preference>
 
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/about_chat_title">
+
+        <Preference
+            android:key="prefs_key_about_join_qq_group"
+            android:title="@string/about_qq_group" />
 
         <Preference android:title="@string/about_tg_group">
             <intent
@@ -151,6 +114,7 @@
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/about_other_title">
+
         <Preference
             android:summary="@string/about_github_desc"
             android:title="@string/about_github">
@@ -159,15 +123,50 @@
                 android:data="https://github.com/ReChronoRain/HyperCeiler" />
         </Preference>
 
-        <com.sevtinge.hyperceiler.prefs.XmlPreference
-            android:key="prefs_key_about_use"
-            android:title="@string/about_use"
-            app:inflatedXml="@xml/prefs_about_use" />
+        <Preference
+            android:summary="@string/about_crwd_desc"
+            android:title="@string/about_crwd">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://crowdin.com/project/cemiuiler" />
+        </Preference>
+
+        <Preference android:title="@string/about_offical">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://hyperceiler.sevtinge.cc" />
+        </Preference>
 
         <Preference
-            android:fragment="com.sevtinge.hyperceiler.home.helper.HelpFragment"
+            android:fragment="com.sevtinge.hyperceiler.ui.about.AboutUseFragment"
+            android:key="prefs_key_about_use"
+            android:title="@string/about_use" />
+
+        <Preference
+            android:summary="@string/about_donation_desc"
+            android:title="@string/about_donation">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://blog.sevtinge.cc/donation" />
+        </Preference>
+
+        <Preference
+            android:fragment="com.sevtinge.hyperceiler.ui.helper.HelpFragment"
             android:key="prefs_key_help"
             android:title="@string/help" />
+
+        <Preference android:title="@string/about_protocol">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://hyperceiler.sevtinge.cc/Protocol" />
+        </Preference>
+
+        <Preference android:title="@string/about_privacy">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://hyperceiler.sevtinge.cc/Privacy" />
+        </Preference>
+
     </PreferenceCategory>
 
     <PreferenceCategory android:layout="@layout/preference_copyright" />
